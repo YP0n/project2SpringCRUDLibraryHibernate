@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New book</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+    <!-- Форма для створення нової книги -->
+    <!-- Атрибут th:method вказує метод HTTP для відправки форми, у даному випадку - POST -->
+    <!-- Атрибут th:action вказує URL-шлях, на який буде відправлена форма -->
+    <!-- Використовується шлях "/books", що означає створення нової книги -->
+
+    <!-- Атрибут th:object вказує на об'єкт, до якого будуть зв'язані поля форми -->
+    <!-- У даному випадку - об'єкт ${book} -->
+
+    <label for="title">Введіть назву книги: </label>
+    <!-- Мітка для поля вводу назви книги -->
+
+    <input type="text" th:field="*{title}" id="title"/>
+    <!-- Поле вводу назви книги -->
+    <!-- Атрибут th:field вказує на поле об'єкту, до якого буде зв'язане значення поля -->
+    <!-- У даному випадку - поле "title" об'єкту ${book} -->
+
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Помилка у назві книги</div>
+    <!-- Виведення повідомлення про помилку, якщо поле має помилку валідації -->
+    <!-- Атрибут th:if перевіряє, чи має поле "title" помилку валідації -->
+    <!-- Якщо так, то виводиться повідомлення про помилку з використанням атрибуту th:errors -->
+
+    <br/>
+
+    <!-- Аналогічно для полів "author" та "year" -->
+    <label for="author">Введіть автора книги: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Помилка у ПІБ автора</div>
+    <br/>
+    <label for="year">Введіть рік: </label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Помилка у році</div>
+    <br/>
+
+    <input type="submit" value="Створити!"/>
+    <!-- Кнопка "Створити" для відправки форми -->
+</form>
+
+</body>
+</html>

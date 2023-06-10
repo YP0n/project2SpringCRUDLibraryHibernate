@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update book</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+    <!-- Форма для оновлення книги -->
+
+    <!-- Метод та дія форми вказуються за допомогою атрибутів th:method та th:action -->
+    <!-- Метод "PATCH" використовується для оновлення ресурсу -->
+    <!-- Дія вказує на URL-шлях, до якого буде надіслано запит оновлення книги -->
+    <!-- У URL-шляху використовується змінна {id}, яка буде замінена на ідентифікатор книги ${book.getId()} -->
+    <label for="title">Введіть назву книги: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <!-- Поле для введення назви книги -->
+    <!-- Атрибут th:field зв'язує поле з відповідним полем об'єкту book -->
+    <!-- За допомогою *{title} вказується, що поле title відноситься до об'єкта book -->
+    <!-- Значення поля буде автоматично заповнено значенням з об'єкта book -->
+    <!-- Якщо поле має помилку, буде відображено повідомлення про помилку -->
+
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Помилка у назві книги</div>
+    <!-- Перевірка на наявність помилок полі title-->
+    <!-- Якщо поле має помилку, відображається повідомлення про помилку -->
+
+    <br/>
+
+    <!-- Аналогічні елементи форми для полів автор і рік -->
+
+    <label for="author">Введіть автора книги: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Помилка у ПІБ автора</div>
+    <br/>
+    <label for="year">Введіть рік: </label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Помилка у році</div>
+    <br/>
+    <input type="submit" value="Редагувати!"/>
+    <!-- Кнопка для відправлення форми -->
+</form>
+
+</body>
+</html>
